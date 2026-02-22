@@ -1,31 +1,120 @@
 <!doctype html>
 <html>
 <head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Clueless | Amber Adams, 2026</title>
 <style type="text/css">
 body {
     margin: 0;
+    background-color: #FFF400;
+    background-image: url("background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    
 }
 wrapper {
-    display: block;
+    display:block;
     width: 1366px;
+	margin:0 auto;
+}
+	button {
+  display: inline-flex; /* Keeps them in a row */
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box; 
+  width: 140px; 
+  height: 50px;
+  background-color: white;
+  border: 4px solid #f8388d;
+  border-radius: 15px;
+  color: black;
+  font-size: 18px;
+  font-family: "Sigmar", sans-serif;
+  padding: 0; 
+  margin: 15px;
+}
+
+	button:hover{
+		color:white;
+		background-color: #479fc7;
+	}
+	
+	nav {
+    display: flex;
+    justify-content:center
+	}
+	
+	.computer{
+  position: relative; /* The computer image stays in the flow */
+  width: 100%;
+  z-index: 2; /* Sits on top of the video */
+  pointer-events: none;
+}
+		
+
+
+iframe {
+	position: absolute;
+  /* You will need to tweak these % values to line up with the 'screen' */
+  top: 11%; 
+  left: 16%;
+  width: 72%; 
+  height: 52%;
+  z-index: 1; /* Sits behind the frame */
+}
+	
+	.media-container {
+  position: relative;
+  width: 500px; /* Adjust to match your computer image width */
+  margin: 0 auto; /* Centers the whole thing on the page */
 }
 header {
-	height:100px;
-    background-color: #FF0404;
+	display:flex;
+	justify-content: center;
 }
+	
 footer {
-    height: 100px;
-    background-color: #32F50F;
 }
+main {
+}
+
+.foottext {
+		}
+	
 </style>
 </head>
 <body>
-<wrapper>
-  <header></header>
-  <main></main>
-  <footer></footer>
-</wrapper>
+	<wrapper>
+  <header>
+	  <img src="Logo.png" alt= "Clueless Logo">
+		
+		</header>
+<nav>
+	<button>Home</button>
+	<button>About</button>
+	<button>Cast</button>
+	<button>Trailer</button>
+	<button>Get Tickets</button>
+		</nav>
+		<main>
+<div class="media-container">
+
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/Mgjwq1ZzdPQ?si=TLHekEETrv90KMa1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+	
+<img src="computer_.png" alt="computer"  class="computer"> 
+	</div>
+	
+		</main>
+     
+	<footer>
+        <div class = "foottext" >
+		  <p>© 2026, Ella Adams.</p>
+          <p>This is a fictitious web page created solely for the purpose of education and training. All products and people associated with this web page are also fictitious. Any resemblance to real brands, products, or people is purely coincidental. Information provided about the product is also fictitious and should not be construed to be representative of actual products on the market in a similar product category.</p>
+        </div>
+      </footer>
+		 </wrapper>
 </body>
 </html>
