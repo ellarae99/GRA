@@ -44,11 +44,12 @@ wrapper {
 	color: #000000;
         }
 header h1 {
-    font-family: "Fraunces", serif;
-    color: #D09A4B;
-    font-style: normal;
-    text-shadow: 4px 0px 9px #2C2214;
-    text-align: center;
+	font-family: "Fraunces", serif;
+	color: #D09A4B;
+	font-style: normal;
+	text-shadow: 4px 0px 9px #2C2214;
+	text-align: center;
+	font-size: 50px;
 }
 
 ul li a {
@@ -81,15 +82,15 @@ nav ul li a:hover {
     color: white;
 }
 header {
-    width: 100%;
-    margin-left: auto;
-    padding: 20px;
-    margin-right: autp;
-    background-image: url(header%20image.jpg);
-    background-size: cover;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+	width: 100%;
+	margin-left: auto;
+	padding: 5px;
+	margin-right: autp;
+	background-image: url(header%20image.jpg);
+	background-size: cover;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 footer {
 	width: 100%;
