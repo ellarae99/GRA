@@ -1,24 +1,29 @@
 <!doctype html>
 <html>
 <head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Puddles&display=swap" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Plane Jane | Ella Adams, 2026</title>
 <script src="https://kit.fontawesome.com/149c9f3198.js" crossorigin="anonymous"></script>
 <style type="text/css">
 body {
-    margin: 0;
-    background-image: url(florence_italy.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 0px 100px;
+	margin: 0;
+	background-image: url("background05.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;	
 }
 header {
-    height: 100px;
-    background-color: #AAC5D8;
+	height: 100px;
+	background-color: #9ED1ED;
 }
 wrapper {
     width: 1366px;
 }
+	h1{
+	;
+	}
 #Tabs1 ul   {
     background-image: none;
     border: none;
@@ -32,8 +37,8 @@ wrapper {
     text-align: center;
 }
 #Tabs1 ul li i {
-    font-size: x-large;
-    color: rgba(255,115,6,1.00);
+	font-size: x-large;
+	color: rgba(70,139,0,1.00);
 }
 	
 	#tabs-1 div {
@@ -41,6 +46,38 @@ wrapper {
 		grid-template-columns: 16% 16% 16% 16% 16% 10%;
 		gap: 10px;
 	}
+	#tabs-2 div {
+		display: grid;
+		grid-template-columns: 16% 16% 16% 16% 10%;
+		gap: 10px;
+	}
+	#tabs-3 div {
+		display: grid;
+		grid-template-columns: 16% 16% 16% 16% 10%;
+		gap: 10px;
+	}#tabs-4 div {
+		display: grid;
+		grid-template-columns: 16% 16% 16% 16% 16% 10%;
+		gap: 10px;
+	}
+	#tabs-5 div {
+		display: grid;
+		grid-template-columns: 16% 16% 16% 10%;
+		gap: 10px;
+	}
+	
+	header wrapper h1 {
+	font-family: "Rubik Puddles", system-ui;
+	font-style: normal;
+	display: inline-block;
+	box-sizing: border-box;
+	font-weight: bold;
+	font-size: 44px;
+	text-align: center;
+	color: #E2E9F1;
+	text-shadow: 3px 1px 20px #202240;
+	}
+
 .search {
     color: rgba(0,0,0,1.00);
 }
@@ -49,18 +86,29 @@ input, select {
     border: thin solid lightgrey;
     padding: 10px;
 }
+header wrapper img {
+	height: 92px;
+	width: auto;
+	padding-left: 264px;
+	display: inline-block;
+}
+	
+
 </style>
 <link href="jQueryAssets/jquery.ui.core.min.css" rel="stylesheet" type="text/css">
 <link href="jQueryAssets/jquery.ui.theme.min.css" rel="stylesheet" type="text/css">
 <link href="jQueryAssets/jquery.ui.tabs.min.css" rel="stylesheet" type="text/css">
+<link href="jQueryAssets/jquery.ui.datepicker.min.css" rel="stylesheet" type="text/css">
 <script src="jQueryAssets/jquery-1.11.1.min.js"></script>
 <script src="jQueryAssets/jquery.ui-1.10.4.tabs.min.js"></script>
+<script src="jQueryAssets/jquery.ui-1.10.4.datepicker.min.js"></script>
 </head>
 
 <body>
 <header>
   <wrapper>
-	<h1>Plane Jane</h1>
+	  <img src="plane.png" alt= "plane photo">
+	  <h1>Plane Jane</h1>
   </wrapper>
 </header>
 <wrapper>
@@ -97,22 +145,73 @@ Activities</a></li>
     </div>
     <div id="tabs-2">
       <p>find your hotels</p>
+		<div>
+	<input type="text" placeholder="Where to?">
+	 <input type="date"><input type="date">
+	<select>
+		  <option value="0">Travelers/Rooms</option>
+		  <option value="1">1</option>
+		  <option value="2">2</option>
+		  <option value="3">3</option>
+		  <option value="4">4</option>
+		  <option value="5">5</option>
+	  </select>
+		<input type="submit" class="search" value="Search">
     </div>
-    <div id="tabs-3">
+    </div>
+<div id="tabs-3">
       <p>Find your car rental</p>
+    <div>
+	 <input type="text" placeholder="Pick up location">
+	 <input type="text" placeholder="Drop off location">
+	<input type="date"><input type="date">
+		<input type="submit" class="search" value="Search">
     </div>
+	</div>
     <div id="tabs-4">
       <p>Bundle and save</p>
+		<div>
+        <input type="text" placeholder="Leaving From">
+        <input type="text" placeholder="Going to">
+        <input type="date"><input type="date">
+  
+		<select>
+		  <option value="0">Number of travelers</option>
+		  <option value="1">1</option>
+		  <option value="2">2</option>
+		  <option value="3">3</option>
+		  <option value="4">4</option>
+		  <option value="5">5</option>
+		</select>
+		<input type="submit" class="search" value="Search">
+	  </div>
     </div>
     <div id="tabs-5">
       <p>Find things to do</p>
+		<div>
+        <input type="text" placeholder="Where to">
+        <input type="date"><input type="date">
+		<input type="submit" class="search" value="Search">
+	  </div>
     </div>
   </div>
+	<footer><p>© 2026, Ella Adams. This is a fictitious web page created solely for the purpose of education and training. All products and people associated with this web page are also fictitious. Any resemblance to real brands, products, or people is purely coincidental. Information provided about the product is also fictitious and should not be construed to be representative of actual products on the market in a similar product category.</p></footer>
 </wrapper>
 <script type="text/javascript">
 $(function() {
 	$( "#Tabs1" ).tabs(); 
 });
+$(function() {
+	$( "#Datepicker1" ).datepicker(); 
+});
+$(function() {
+	$( "#Datepicker1" ).datepicker(); 
+});
+$(function() {
+	$( "#Datepicker2" ).datepicker(); 
+});
 </script>
 </body>
+	
 </html>
+
