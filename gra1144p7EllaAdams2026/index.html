@@ -15,14 +15,35 @@ body {
 	background-size: cover;	
 	cursor: url( "plane_cursor.png"), auto;
 }
-wrapper a img {
+
+	header h1, #Tabs1 p {
+    margin: 0;
+    padding: 20px 0; 
 }
-header {
-	height: 100px;
-	background-color: #9ED1ED;
-}
-wrapper {
+
+	wrapper {
+    display: block;
     width: 1366px;
+    margin: 0 auto;
+}
+
+header {
+    height: 100px;
+    background-color: #9ED1ED;
+    margin-bottom: 0;
+}
+header wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; 
+}
+
+header wrapper img {
+    height: 70px;
+    width: auto;
+    padding-left: 0; 
+	
 }
 
 #Tabs1 ul   {
@@ -30,9 +51,11 @@ wrapper {
     border: none;
     background-color: transparent;
 }
-#Tabs1 {
+
+	#Tabs1 {
+    margin-top: 0;
+    border-top: none;
     background-color: rgba(255,255,255,0.50);
-    background-image: none;
 }
 #Tabs1 ul li {
     text-align: center;
@@ -42,31 +65,49 @@ wrapper {
 	color: rgba(70,139,0,1.00);
 }
 	
-	#tabs-1 div {
-		display: grid;
-		grid-template-columns: 16% 16% 16% 16% 16% 10%;
-		gap: 10px;
-	}
-	#tabs-2 div {
-		display: grid;
-		grid-template-columns: 16% 16% 16% 16% 10%;
-		gap: 10px;
-	}
-	#tabs-3 div {
-		display: grid;
-		grid-template-columns: 16% 16% 16% 16% 10%;
-		gap: 10px;
-	}
-	#tabs-4 div {
-		display: grid;
-		grid-template-columns: 16% 16% 16% 16% 16% 10%;
-		gap: 10px;
-	}
-	#tabs-5 div {
-		display: grid;
-		grid-template-columns: 16% 16% 16% 10%;
-		gap: 10px;
-	}
+	cursor: url("plane_cursor.png"), auto !important;
+}
+
+
+a, img, a img {
+    cursor: url("plane_cursor.png"), auto !important;
+}
+	
+	
+	
+
+input, select {
+    border-radius: 20px; 
+    border: 1px solid #ddd;
+    padding: 12px 20px;
+    font-family: sans-serif;
+}
+
+.search {
+    background-color: #468B00;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.search:hover {
+    background-color: #356a00;
+}
+	
+	
+	
+	#Tabs1 div[id^="tabs-"] div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 0;
+}
+	
+
 	
 	header wrapper h1 {
 	font-family: "Rubik Puddles", system-ui;
@@ -80,22 +121,63 @@ wrapper {
 	text-shadow: 3px 1px 20px #202240;
 	}
 
-.search {
-    color: rgba(0,0,0,1.00);
+
+	.destinations {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
-input, select {
-    border-radius: 8px;
-    border: thin solid lightgrey;
-    padding: 10px;
+
+.destinations img {
+    width: 300px;
+    border: 15px solid white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
 }
-header wrapper img {
-	height: 92px;
-	width: auto;
-	padding-left: 264px;
-	display: inline-block;
+
+.destinations img:hover {
+    transform: rotate(-3deg) scale(1.05); 
+}
+footer {
+	text-align: center;
+	padding: 40px 20px;
+	font-size: 12px;
+	color: #FFFFFF;
+	line-height: 1.6;
 }
 	
+	
+input, 
+select, 
+textarea, 
+button {
+    cursor: url("plane_cursor.png"), auto !important;
+}
 
+
+input[type="text"], 
+input[type="date"] {
+    cursor: url("plane_cursor.png"), auto !important;
+}
+
+#Tabs1 .ui-tabs-nav li, 
+#Tabs1 .ui-tabs-nav li a {
+    cursor: url("plane_cursor.png"), auto !important;
+}
+
+
+.ui-tabs .ui-tabs-panel {
+    cursor: url("plane_cursor.png"), auto !important;
+}
+
+
+.ui-state-default, 
+.ui-state-hover, 
+.ui-state-active {
+    cursor: url("plane_cursor.png"), auto !important;
+}
 </style>
 <link href="jQueryAssets/jquery.ui.core.min.css" rel="stylesheet" type="text/css">
 <link href="jQueryAssets/jquery.ui.theme.min.css" rel="stylesheet" type="text/css">
@@ -196,7 +278,8 @@ Activities</a></li>
 	  </div>
     </div>
   </div>
-	
+	<div class="destinations">
+    
 	<a href="https://santorini.gr/">
   <img src="Santorini Greece.png" alt="Greece">
 </a>
@@ -208,6 +291,7 @@ Activities</a></li>
 	<a href="https://www.italia.it/en/tuscany/florence">
   <img src="Florence, Italy.png" alt="Florence">
 </a>
+		</div>
 	
 
 	<footer><p>© 2026, Ella Adams. This is a fictitious web page created solely for the purpose of education and training. All products and people associated with this web page are also fictitious. Any resemblance to real brands, products, or people is purely coincidental. Information provided about the product is also fictitious and should not be construed to be representative of actual products on the market in a similar product category.</p></footer>
