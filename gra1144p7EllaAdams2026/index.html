@@ -13,6 +13,9 @@ body {
 	background-image: url("background05.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;	
+	cursor: url( "plane_cursor.png"), auto;
+}
+wrapper a img {
 }
 header {
 	height: 100px;
@@ -21,9 +24,7 @@ header {
 wrapper {
     width: 1366px;
 }
-	h1{
-	;
-	}
+
 #Tabs1 ul   {
     background-image: none;
     border: none;
@@ -55,7 +56,8 @@ wrapper {
 		display: grid;
 		grid-template-columns: 16% 16% 16% 16% 10%;
 		gap: 10px;
-	}#tabs-4 div {
+	}
+	#tabs-4 div {
 		display: grid;
 		grid-template-columns: 16% 16% 16% 16% 16% 10%;
 		gap: 10px;
@@ -101,7 +103,6 @@ header wrapper img {
 <link href="jQueryAssets/jquery.ui.datepicker.min.css" rel="stylesheet" type="text/css">
 <script src="jQueryAssets/jquery-1.11.1.min.js"></script>
 <script src="jQueryAssets/jquery.ui-1.10.4.tabs.min.js"></script>
-<script src="jQueryAssets/jquery.ui-1.10.4.datepicker.min.js"></script>
 </head>
 
 <body>
@@ -126,7 +127,7 @@ Packages</a></li>
 Activities</a></li>
     </ul>
     <div id="tabs-1">
-      <p>Find your flights</p>
+      <p>Find your flights.</p>
       <div>
         <input type="text" placeholder="Leaving From">
         <input type="text" placeholder="Going to">
@@ -144,7 +145,7 @@ Activities</a></li>
 	  </div>
     </div>
     <div id="tabs-2">
-      <p>find your hotels</p>
+      <p>Find your hotels.</p>
 		<div>
 	<input type="text" placeholder="Where to?">
 	 <input type="date"><input type="date">
@@ -160,7 +161,7 @@ Activities</a></li>
     </div>
     </div>
 <div id="tabs-3">
-      <p>Find your car rental</p>
+      <p>Find your car rental.</p>
     <div>
 	 <input type="text" placeholder="Pick up location">
 	 <input type="text" placeholder="Drop off location">
@@ -169,7 +170,7 @@ Activities</a></li>
     </div>
 	</div>
     <div id="tabs-4">
-      <p>Bundle and save</p>
+      <p>Bundle and save.</p>
 		<div>
         <input type="text" placeholder="Leaving From">
         <input type="text" placeholder="Going to">
@@ -187,7 +188,7 @@ Activities</a></li>
 	  </div>
     </div>
     <div id="tabs-5">
-      <p>Find things to do</p>
+      <p>Find things to do.</p>
 		<div>
         <input type="text" placeholder="Where to">
         <input type="date"><input type="date">
@@ -195,21 +196,28 @@ Activities</a></li>
 	  </div>
     </div>
   </div>
+	
+	<a href="https://santorini.gr/">
+  <img src="Santorini Greece.png" alt="Greece">
+</a>
+	
+	<a href="https://sandiegovisit.org/">
+  <img src="San Francisco, California.png" alt="San Francisco">
+</a>
+	
+	<a href="https://www.italia.it/en/tuscany/florence">
+  <img src="Florence, Italy.png" alt="Florence">
+</a>
+	
+
 	<footer><p>© 2026, Ella Adams. This is a fictitious web page created solely for the purpose of education and training. All products and people associated with this web page are also fictitious. Any resemblance to real brands, products, or people is purely coincidental. Information provided about the product is also fictitious and should not be construed to be representative of actual products on the market in a similar product category.</p></footer>
 </wrapper>
 <script type="text/javascript">
 $(function() {
 	$( "#Tabs1" ).tabs(); 
 });
-$(function() {
-	$( "#Datepicker1" ).datepicker(); 
-});
-$(function() {
-	$( "#Datepicker1" ).datepicker(); 
-});
-$(function() {
-	$( "#Datepicker2" ).datepicker(); 
-});
+
+
 </script>
 </body>
 	
