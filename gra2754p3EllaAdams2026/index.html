@@ -6,6 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
 <style type="text/css">
 @import url("webfonts/Starborn/stylesheet.css");
 
@@ -28,24 +29,35 @@
   box-sizing: border-box;
 }
 
+
 body {
   margin: 0;
-  font-family: 'Quicksand', "Segoe UI", sans-serif;
+  padding: 0;
   background-image: url("background.webp");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
+  font-family: 'Quicksand', "Segoe UI", sans-serif;
   color: var(--text-main);
   min-height: 100vh;
+}
+
+
+wrapper {
+  width: 100%;
+  max-width: 1366px;
+  display: block;
+  margin: 0 auto;
   padding: 30px 16px;
 }
 
-wrapper {
-  max-width: 1280px;
-  width: 92%;
-  margin: 0 auto;
-  display: block;
+
+@media (min-width: 800px) {
+  wrapper {
+    min-width: 800px;
+    padding: 30px 24px;
+  }
 }
 
 header {
@@ -77,7 +89,6 @@ h1.rainbow-text {
   line-height: 1.2;
 }
 
-
 .rainbow-text span:nth-child(1) { color: #ff5e7e; } 
 .rainbow-text span:nth-child(2) { color: #ff9248; } 
 .rainbow-text span:nth-child(3) { color: #ffc43d; } 
@@ -93,20 +104,21 @@ main {
   gap: 24px;
 }
 
-@media (min-width: 680px) {
+
+@media (min-width: 32em) {
   main {
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
   }
 }
 
-@media (min-width: 1100px) {
+
+@media (min-width: 64em) {
   main {
     grid-template-columns: repeat(3, 1fr);
     gap: 28px;
   }
 }
-
 
 section {
   background: var(--card-bg);
@@ -147,7 +159,6 @@ section:hover img {
   transform: scale(1.03);
 }
 
-
 .badge {
   position: absolute;
   top: 14px;
@@ -187,7 +198,6 @@ section p {
   color: var(--text-muted);
 }
 
-
 footer {
   margin-top: 48px;
   padding: 24px;
@@ -216,9 +226,8 @@ footer p:first-child {
 <body>
 <wrapper>
   <header>
-	  <h1 class="rainbow-text"><span>Or</span><span>ag</span><span>am</span><span>i f</span><span>or </span><span>ki</span><span>ds</span></h1>
-
-</header>
+    <h1 class="rainbow-text"><span>Or</span><span>ag</span><span>am</span><span>i f</span><span>or </span><span>ki</span><span>ds</span></h1>
+  </header>
   <main>
     <section>
       <div class="img-wrap">
@@ -353,9 +362,9 @@ footer p:first-child {
     </section>
   </main>
   <footer>
-<p>© 2026, Ella Adams</p>
-<p>This is a fictitious web page created solely for the purpose of education and training. All products and people associated with this web page are also fictitious. Any resemblance to real brands, products, or people is purely coincidental. Information provided about the product is also fictitious and should not be construed to be representative of actual products on the market in a similar product category.</p>
-</footer>
+    <p>© 2026, Ella Adams</p>
+    <p>This is a fictitious web page created solely for the purpose of education and training. All products and people associated with this web page are also fictitious. Any resemblance to real brands, products, or people is purely coincidental. Information provided about the product is also fictitious and should not be construed to be representative of actual products on the market in a similar product category.</p>
+  </footer>
 </wrapper>
 </body>
 </html>
