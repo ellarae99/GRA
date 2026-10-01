@@ -1,0 +1,361 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>DIY Responsive Layout | Ella Adams</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style type="text/css">
+@import url("webfonts/Starborn/stylesheet.css");
+
+@font-face {
+  font-family: Starborn;
+  src: url("Starborn.otf");
+}
+
+:root {
+  --primary-pink: #ff6b9d;
+  --bubblegum: #ff8fab;
+  --card-bg: rgba(255, 255, 255, 0.94);
+  --text-main: #3d3b4f;
+  --text-muted: #5e5c70;
+  --shadow-soft: 0 10px 25px rgba(255, 107, 157, 0.15), 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 16px 32px rgba(255, 107, 157, 0.25), 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Quicksand', "Segoe UI", sans-serif;
+  background-image: url("background.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  color: var(--text-main);
+  min-height: 100vh;
+  padding: 30px 16px;
+}
+
+wrapper {
+  max-width: 1280px;
+  width: 92%;
+  margin: 0 auto;
+  display: block;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 36px;
+  padding: 24px 20px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 24px;
+  box-shadow: var(--shadow-soft);
+  display: inline-block;
+  width: 100%;
+}
+
+.subhead {
+  margin: 8px 0 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+h1.rainbow-text {
+  margin: 0;
+  font-family: Starborn, cursive, sans-serif;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  letter-spacing: 2px;
+  line-height: 1.2;
+}
+
+
+.rainbow-text span:nth-child(1) { color: #ff5e7e; } 
+.rainbow-text span:nth-child(2) { color: #ff9248; } 
+.rainbow-text span:nth-child(3) { color: #ffc43d; } 
+.rainbow-text span:nth-child(4) { color: #06d6a0; } 
+.rainbow-text span:nth-child(5) { color: #118ab2; } 
+.rainbow-text span:nth-child(6) { color: #8338ec; } 
+.rainbow-text span:nth-child(7) { color: #ff477e; } 
+
+
+main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 680px) {
+  main {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1100px) {
+  main {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+}
+
+
+section {
+  background: var(--card-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+}
+
+section:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+.img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: #f7eaf0;
+}
+
+section img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+section:hover img {
+  transform: scale(1.03);
+}
+
+
+.badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--primary-pink);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.content {
+  padding: 18px 20px 22px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+section h3 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2b2234;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+section p {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+
+footer {
+  margin-top: 48px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 18px;
+  text-align: center;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  box-shadow: var(--shadow-soft);
+}
+
+footer p {
+  margin: 6px 0;
+}
+
+footer p:first-child {
+  font-weight: 700;
+  color: var(--text-main);
+}
+</style>
+</head>
+
+<body>
+<wrapper>
+  <header>
+	  <h1 class="rainbow-text"><span>Or</span><span>ag</span><span>am</span><span>i f</span><span>or </span><span>ki</span><span>ds</span></h1>
+
+</header>
+  <main>
+    <section>
+      <div class="img-wrap">
+        <span class="badge">Step 01</span>
+        <img src="step1.jpeg" alt="Step 1: Supplies" width="474" height="474">
+      </div>
+      <div class="content">
+        <h3>Grab Your Supplies</h3> 
+        <p>Gather colorful pink and white paper, child-safe scissors, a marker, and a glue stick.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="img-wrap">
+        <span class="badge">Step 02</span>
+        <img src="step2.jpeg" alt="Step 2: Fold X crease" width="474" height="474">
+      </div>
+      <div class="content">
+        <h3>Make an X</h3>
+        <p>Take your square paper and fold corner to corner both ways, then open it back up to see an "X" crease!</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="img-wrap">
+        <span class="badge">Step 03</span>
+        <img src="step3.jpeg" alt="Step 3: Fold down tip" width="474" height="474">
+      </div>
+      <div class="content">
+        <h3>Fold Down the Tip</h3>
+        <p>Fold the paper in half like a big triangle, then fold just the top corner flap down to meet the bottom flat edge.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="img-wrap">
+        <span class="badge">Step 04</span>
+        <img src="step4.jpeg" alt="Step 4: Fold wings up" width="474" height="474">
+      </div>
+      <div class="content">
+        <h3>Fold the Wings Up</h3>
+        <p>Take both side corners and fold them up toward the top point to make a shiny diamond shape.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="img-wrap">
+        <span class="badge">Step 05</span>
+        <img src="step5.jpeg" alt="Step 5: Tuck pockets" width="474" height="474">
+      </div>
+      <div class="content">
+        <h3>Tuck Them In</h3>
+        <p>Take those same flaps and tuck the pointy ends straight inside the little pocket you made!</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="img-wrap">
+        <span class="badge">Step 06</span>
+        <img src="step6.jpg" alt="Step 6: Press flat" width="474" height="474">
+      </div>
+      <div class="content">
+        <h3>Press It Flat</h3>
+        <p>Smooth down every edge with your fingers so you have a neat, tidy diamond pouch.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="img-wrap">
+        <span class="badge">Step 07</span>
+        <img src="step7.jpeg" alt="Step 7: Snip pieces" width="474" height="474">
+      </div>
+      <div class="content">
+        <h3>Snip the Bunny Pieces</h3>
+        <p>Carefully cut out two bunny ears, pink inner ears, cute white cheeks, bunny teeth, and eyes.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="img-wrap">
+        <span class="badge">Step 08</span>
+        <img src="step8.jpeg" alt="Step 8: Assemble face" width="474" height="474">
+      </div>
+      <div class="content">
+        <h3>Build the Face</h3>
+        <p>Glue the pink pieces inside the ears, and stick the cute nose and teeth behind the cheeks.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="img-wrap">
+        <span class="badge">Step 09</span>
+        <img src="step9.jpg" alt="Step 9: Apply glue" width="474" height="474">
+      </div>
+      <div class="content">
+        <h3>Get Gluing</h3>
+        <p>Swipe a little glue onto the back of your bunny ears and face pieces.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="img-wrap">
+        <span class="badge">Step 10</span>
+        <img src="step10.jpg" alt="Step 10: Whiskers and face" width="474" height="474">
+      </div>
+      <div class="content">
+        <h3>Whiskers &amp; Face</h3>
+        <p>Press the eyes, cheeks, and fun little paper whiskers right onto the front flap.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="img-wrap">
+        <span class="badge">Step 11</span>
+        <img src="step11.jpg" alt="Step 11: Add ears and bow" width="474" height="474">
+      </div>
+      <div class="content">
+        <h3>Add Ears &amp; Bow</h3>
+        <p>Glue the big ears behind the bookmark and pop a tiny decorative bow on top!</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="img-wrap">
+        <span class="badge">Step 12</span>
+        <img src="step12.jpeg" alt="Step 12: Finished bookmark" width="474" height="474">
+      </div>
+      <div class="content">
+        <h3>Ready to Read</h3>
+        <p>Slide your cute new bunny friend over the corner of your favorite book page to save your spot!</p>
+      </div>
+    </section>
+  </main>
+  <footer>
+<p>© 2026, Ella Adams</p>
+<p>This is a fictitious web page created solely for the purpose of education and training. All products and people associated with this web page are also fictitious. Any resemblance to real brands, products, or people is purely coincidental. Information provided about the product is also fictitious and should not be construed to be representative of actual products on the market in a similar product category.</p>
+</footer>
+</wrapper>
+</body>
+</html>
