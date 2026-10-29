@@ -1,548 +1,282 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Drag and Drop Game | Ella Adams, 2026</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Dress Up Doll Game</title>
+  
+  <!-- Import a cute, bubbly princess font from Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
   <style>
-    body {
-      font-family: 'Quicksand', sans-serif;
-      background: radial-gradient(circle at 50% 50%, #ffeaf2 0%, #ffd0e0 50%, #ffbacf 100%);
-      user-select: none;
-      -webkit-user-select: none;
-      overflow: hidden;
-      touch-action: none;
+    /* CSS Resets for body and wrapper */
+    body, html {
       margin: 0;
       padding: 0;
+      background-color: #ffeaf2;
+      font-family: 'Fredoka', 'Segoe UI', Tahoma, sans-serif;
     }
 
-    #scale-container {
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    #game-stage {
-      position: relative;
-      width: 1000px;
-      height: 750px;
-      background-image: url('background.png');
-      background-size: 100% 100%;
-      background-position: center;
-      background-repeat: no-repeat;
-      overflow: hidden;
-      box-shadow: 0 20px 50px -10px rgba(214, 51, 108, 0.35);
-      border-radius: 24px;
-      flex-shrink: 0;
-    }
-
-    /* Draggable Item Styling */
-    .draggable-item {
-      position: absolute;
-      cursor: grab;
-      touch-action: none;
-      transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.18s ease;
-      z-index: 30;
-      filter: drop-shadow(0 3px 6px rgba(180, 50, 95, 0.22));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .draggable-item:hover {
-      transform: scale(1.09) translateY(-3px);
-      filter: drop-shadow(0 7px 12px rgba(214, 51, 108, 0.38));
-    }
-
-    .draggable-item.is-dragging {
-      cursor: grabbing;
-      opacity: 0.94;
-      transform: scale(1.15) rotate(2deg) !important;
-      z-index: 1000 !important;
-      transition: none !important;
-      filter: drop-shadow(0 12px 18px rgba(190, 30, 80, 0.45));
-    }
-
-    .draggable-item.equipped {
-      filter: drop-shadow(0 2px 4px rgba(130, 20, 60, 0.18));
-    }
-
-    .draggable-item.equipped:hover {
-      transform: scale(1.03);
-    }
-
-    .draggable-item.smooth-transit {
-      transition: left 0.32s cubic-bezier(0.25, 1, 0.5, 1), top 0.32s cubic-bezier(0.25, 1, 0.5, 1), transform 0.2s ease !important;
-    }
-
-    /* Target highlight rings (appear gently while dragging) */
-    .drop-zone {
-      position: absolute;
-      border: 3px dashed transparent;
-      border-radius: 50%;
-      pointer-events: none;
-      transition: border-color 0.2s ease, background 0.2s ease;
-    }
-
-    .drop-zone.active-target {
-      border-color: rgba(255, 60, 130, 0.6);
-      background: rgba(255, 105, 180, 0.14);
-      animation: pulse-ring 1.3s infinite;
-    }
-
-    @keyframes pulse-ring {
-      0% { transform: scale(0.98); }
-      50% { transform: scale(1.03); }
-      100% { transform: scale(0.98); }
-    }
-
-    .sparkle {
-      position: absolute;
-      pointer-events: none;
-      animation: floatSparkle 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-      z-index: 600;
-    }
-
-    @keyframes floatSparkle {
-      0% {
-        opacity: 1;
-        transform: translate(0, 0) scale(0.4) rotate(0deg);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(var(--tx), var(--ty)) scale(1.2) rotate(var(--rot));
-      }
-    }
-
-    /* Fallback stylized badge if PNG is not yet loaded */
-    .img-fallback {
-      width: 100%;
-      height: 100%;
+    /* 1366-pixel fixed-width wrapper (Rubric requirement) */
+    #wrapper {
+      width: 1366px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      box-shadow: 0 0 15px rgba(214, 51, 108, 0.2);
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255, 255, 255, 0.85);
-      border: 2px dashed #ff9bb7;
-      border-radius: 12px;
-      font-size: 10px;
-      font-weight: 700;
-      color: #d6336c;
+      min-height: 100vh;
+    }
+
+    /* Cute Princess Header Styling */
+    header {
+      background: linear-gradient(135deg, #ffc2dc 0%, #ffdfed 100%);
+      padding: 25px 30px;
+      border-bottom: 4px solid #ff9bb7;
       text-align: center;
-      padding: 2px;
-      box-sizing: border-box;
+    }
+
+    header h1 {
+      font-size: 52px;
+      margin: 0;
+      color: #d6336c;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 0px #ffffff, 4px 4px 10px rgba(214, 51, 108, 0.25);
+    }
+
+    header h2 {
+      font-size: 18px;
+      margin: 8px 0 0 0;
+      color: #9e1b43;
+      font-weight: 500;
+    }
+
+    main {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    /* THE GAME STAGE: 1280x1024 background match */
+    #game-stage {
+      width: 1280px; 
+      height: 1024px; 
+      position: relative;
+      background-image: url('background.jpg');
+      background-size: 100% 100%;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    /* THE WARDROBE: Centered grid layout over shelves */
+    #wardrobe-zone {
+	position: absolute;
+	top: 140px;
+	left: 164px;
+	width: 464px;
+	height: 688px;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	gap: 10px;
+	justify-items: center;
+	align-items: center;
+	padding: 10px;
+	z-index: 10;
+    }
+
+    /* Wardrobe Thumbnails */
+    #wardrobe-zone img {
+      position: static;
+      width: 78px;  
+      height: 78px;
+      object-fit: contain;
+      background-color: rgba(255, 255, 255, 0.85);
+      border: 2px solid #ffbacf;
+      border-radius: 8px;
+      padding: 4px;
+      cursor: grab;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    #wardrobe-zone img:hover {
+      transform: scale(1.12);
+      background-color: #ffffff;
+      border-color: #d6336c;
+    }
+
+    /* Dropped items on game stage (-full.png) */
+    #game-stage > img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      cursor: grab;
+      pointer-events: auto;
+    }
+
+    footer {
+      background-color: #ffbacf;
+      padding: 20px;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    footer p {
+      font-size: 14px;
+      margin: 0;
+      color: #862e9c;
     }
   </style>
-</head>
-<body class="w-screen h-screen">
-
-  <main id="scale-container">
-    <div id="game-stage">
-
-      <!-- Target Drop Zones on the Doll -->
-      <div id="zone-head" class="drop-zone" style="left: 650px; top: 300px; width: 190px; height: 180px;"></div>
-      <div id="zone-torso" class="drop-zone" style="left: 690px; top: 510px; width: 110px; height: 110px; border-radius: 24px;"></div>
-      <div id="zone-bottom" class="drop-zone" style="left: 695px; top: 560px; width: 100px; height: 110px; border-radius: 20px;"></div>
-      <div id="zone-feet" class="drop-zone" style="left: 700px; top: 660px; width: 95px; height: 75px; border-radius: 18px;"></div>
-      <div id="zone-hand" class="drop-zone" style="left: 790px; top: 535px; width: 85px; height: 85px; border-radius: 50%;"></div>
-
-      <!-- Container where all 32 items are dynamically rendered -->
-      <div id="items-layer"></div>
-
-    </div>
-  </main>
 
   <script>
     // =========================================================================
-    // 1. SOUND EFFECTS (Web Audio API - Self-Contained)
+    // BUILT-IN SOUND SYNTHESIZER (No buttons required)
     // =========================================================================
     let audioCtx = null;
     function initAudio() {
-      if (!audioCtx) {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        audioCtx = new AudioContext();
-      }
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
+      try {
+        if (!audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          audioCtx = new AudioContext();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      } catch (err) {}
     }
 
     function playSound(type) {
       initAudio();
       if (!audioCtx) return;
-      const now = audioCtx.currentTime;
-
-      if (type === 'pickup') {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(450, now);
-        osc.frequency.exponentialRampToValueAtTime(720, now + 0.09);
-        gain.gain.setValueAtTime(0.18, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.09);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start(now);
-        osc.stop(now + 0.1);
-      } else if (type === 'equip') {
-        [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+      try {
+        const now = audioCtx.currentTime;
+        if (type === 'pickup') {
           const osc = audioCtx.createOscillator();
           const gain = audioCtx.createGain();
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(freq, now + idx * 0.035);
-          gain.gain.setValueAtTime(0.14, now + idx * 0.035);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.035 + 0.28);
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(450, now);
+          osc.frequency.exponentialRampToValueAtTime(700, now + 0.08);
+          gain.gain.setValueAtTime(0.18, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
           osc.connect(gain);
           gain.connect(audioCtx.destination);
-          osc.start(now + idx * 0.035);
-          osc.stop(now + idx * 0.035 + 0.3);
-        });
-      } else if (type === 'return') {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(580, now);
-        osc.frequency.exponentialRampToValueAtTime(320, now + 0.12);
-        gain.gain.setValueAtTime(0.14, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start(now);
-        osc.stop(now + 0.14);
-      }
+          osc.start(now);
+          osc.stop(now + 0.09);
+        } else if (type === 'equip') {
+          [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, now + idx * 0.035);
+            gain.gain.setValueAtTime(0.14, now + idx * 0.035);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.035 + 0.28);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(now + idx * 0.035);
+            osc.stop(now + idx * 0.035 + 0.3);
+          });
+        } else if (type === 'return') {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(560, now);
+          osc.frequency.exponentialRampToValueAtTime(320, now + 0.1);
+          gain.gain.setValueAtTime(0.14, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now);
+          osc.stop(now + 0.11);
+        }
+      } catch (err) {}
     }
 
     // =========================================================================
-    // 2. 32 ITEMS SPECIFICATION (Closet Layout & Doll Snap Positions)
+    // NATIVE DRAG AND DROP & FILE SWAPPING
     // =========================================================================
-    // Stage is 1000 x 750
-    // Closet interior: X ~ 130 to 515, Y ~ 150 to 680
-    // Doll head center: ~ (746, 380), Torso center: ~ (746, 560), Feet: ~ (746, 680)
-
-    const ITEMS_CONFIG = [
-      // ROW 1: Top Shelf Mannequins (Items 01 - 05: Wigs/Hair)
-      { id: 'item01', type: 'hair', slot: 'hair', zIndex: 60, width: 88, homeX: 138, homeY: 172, snapX: 654, snapY: 288, label: 'Star Hair' },
-      { id: 'item02', type: 'hair', slot: 'hair', zIndex: 60, width: 88, homeX: 212, homeY: 172, snapX: 654, snapY: 278, label: 'Buns Hair' },
-      { id: 'item03', type: 'hair', slot: 'hair', zIndex: 60, width: 88, homeX: 286, homeY: 172, snapX: 654, snapY: 286, label: 'Dark Clips' },
-      { id: 'item04', type: 'hair', slot: 'hair', zIndex: 60, width: 88, homeX: 360, homeY: 172, snapX: 654, snapY: 288, label: 'Cherry Curls' },
-      { id: 'item05', type: 'hair', slot: 'hair', zIndex: 60, width: 88, homeX: 434, homeY: 172, snapX: 654, snapY: 288, label: 'Bow Hair' },
-
-      // ROW 2: Clothes Hanger Bar (Items 06 - 10: Tops/Shirts)
-      { id: 'item06', type: 'top', slot: 'top', zIndex: 50, width: 72, homeX: 136, homeY: 330, snapX: 704, snapY: 534, label: 'Pink Star Top' },
-      { id: 'item07', type: 'top', slot: 'top', zIndex: 50, width: 84, homeX: 210, homeY: 330, snapX: 698, snapY: 530, label: 'Cherry Tee' },
-      { id: 'item08', type: 'top', slot: 'top', zIndex: 50, width: 75, homeX: 284, homeY: 328, snapX: 703, snapY: 530, label: 'Butterfly Tank' },
-      { id: 'item09', type: 'top', slot: 'top', zIndex: 50, width: 76, homeX: 358, homeY: 330, snapX: 702, snapY: 530, label: 'Ruffle Blouse' },
-      { id: 'item10', type: 'top', slot: 'top', zIndex: 50, width: 78, homeX: 432, homeY: 330, snapX: 701, snapY: 530, label: 'Sailor Shirt' },
-
-      // ROW 3: Shelf 1 (Items 11 - 15: Bottoms / Skirts / Shorts)
-      { id: 'item11', type: 'bottom', slot: 'bottom', zIndex: 45, width: 72, homeX: 136, homeY: 420, snapX: 704, snapY: 570, label: 'Pink Skirt' },
-      { id: 'item12', type: 'bottom', slot: 'bottom', zIndex: 45, width: 72, homeX: 210, homeY: 420, snapX: 704, snapY: 570, label: 'Pleated Skirt' },
-      { id: 'item13', type: 'bottom', slot: 'bottom', zIndex: 45, width: 72, homeX: 284, homeY: 420, snapX: 704, snapY: 572, label: 'Denim Shorts' },
-      { id: 'item14', type: 'bottom', slot: 'bottom', zIndex: 45, width: 72, homeX: 358, homeY: 420, snapX: 704, snapY: 572, label: 'Star Shorts' },
-      { id: 'item15', type: 'bottom', slot: 'bottom', zIndex: 45, width: 74, homeX: 432, homeY: 420, snapX: 703, snapY: 570, label: 'Lace Skirt' },
-
-      // ROW 4: Shelf 2 (Items 16 - 20: Full Dresses / Outfits)
-      { id: 'item16', type: 'dress', slot: 'dress', zIndex: 52, width: 88, homeX: 132, homeY: 510, snapX: 696, snapY: 530, label: 'Lolita Dress' },
-      { id: 'item17', type: 'dress', slot: 'dress', zIndex: 52, width: 86, homeX: 206, homeY: 510, snapX: 697, snapY: 530, label: 'Princess Gown' },
-      { id: 'item18', type: 'dress', slot: 'dress', zIndex: 52, width: 88, homeX: 280, homeY: 510, snapX: 696, snapY: 530, label: 'Cherry Dress' },
-      { id: 'item19', type: 'dress', slot: 'dress', zIndex: 52, width: 86, homeX: 354, homeY: 510, snapX: 697, snapY: 530, label: 'Pastel Dress' },
-      { id: 'item20', type: 'dress', slot: 'dress', zIndex: 52, width: 88, homeX: 428, homeY: 510, snapX: 696, snapY: 530, label: 'Maid Uniform' },
-
-      // ROW 5 (Part A): Bottom Shelf Left (Items 21 - 25: Shoes / Footwear)
-      { id: 'item21', type: 'shoes', slot: 'shoes', zIndex: 40, width: 68, homeX: 136, homeY: 620, snapX: 712, snapY: 676, label: 'Pink Mary Janes' },
-      { id: 'item22', type: 'shoes', slot: 'shoes', zIndex: 40, width: 68, homeX: 206, homeY: 620, snapX: 712, snapY: 676, label: 'Ribbon Boots' },
-      { id: 'item23', type: 'shoes', slot: 'shoes', zIndex: 40, width: 66, homeX: 276, homeY: 620, snapX: 713, snapY: 676, label: 'Sneakers' },
-      { id: 'item24', type: 'shoes', slot: 'shoes', zIndex: 40, width: 68, homeX: 346, homeY: 620, snapX: 712, snapY: 676, label: 'Platform Heels' },
-      { id: 'item25', type: 'shoes', slot: 'shoes', zIndex: 40, width: 68, homeX: 416, homeY: 620, snapX: 712, snapY: 676, label: 'Bunny Slippers' },
-
-      // ROW 5 & Shelf sides (Items 26 - 29: Handhelds / Bags / Plushies)
-      { id: 'item26', type: 'hand', slot: 'hand', zIndex: 75, width: 54, homeX: 140, homeY: 665, snapX: 792, snapY: 555, label: 'Magic Wand' },
-      { id: 'item27', type: 'hand', slot: 'hand', zIndex: 75, width: 56, homeX: 220, homeY: 665, snapX: 790, snapY: 555, label: 'Bunny Plush' },
-      { id: 'item28', type: 'hand', slot: 'hand', zIndex: 75, width: 58, homeX: 300, homeY: 665, snapX: 788, snapY: 555, label: 'Heart Purse' },
-      { id: 'item29', type: 'hand', slot: 'hand', zIndex: 75, width: 58, homeX: 380, homeY: 665, snapX: 788, snapY: 555, label: 'Star Basket' },
-
-      // Head Accessories / Hats / Glasses (Items 30 - 32)
-      { id: 'item30', type: 'head_acc', slot: 'head_acc', zIndex: 70, width: 62, homeX: 448, homeY: 665, snapX: 715, snapY: 300, label: 'Star Beret' },
-      { id: 'item31', type: 'head_acc', slot: 'head_acc', zIndex: 70, width: 56, homeX: 470, homeY: 330, snapX: 718, snapY: 320, label: 'Pink Glasses' },
-      { id: 'item32', type: 'head_acc', slot: 'head_acc', zIndex: 70, width: 54, homeX: 470, homeY: 420, snapX: 719, snapY: 295, label: 'Cat Ears' }
-    ];
-
-    // Target Hitboxes on the Doll
-    const TARGETS = {
-      hair:     { xMin: 620, xMax: 870, yMin: 250, yMax: 490, zone: document.getElementById('zone-head') },
-      head_acc: { xMin: 640, xMax: 850, yMin: 260, yMax: 440, zone: document.getElementById('zone-head') },
-      top:      { xMin: 660, xMax: 830, yMin: 480, yMax: 630, zone: document.getElementById('zone-torso') },
-      dress:    { xMin: 650, xMax: 840, yMin: 480, yMax: 650, zone: document.getElementById('zone-torso') },
-      bottom:   { xMin: 660, xMax: 830, yMin: 540, yMax: 660, zone: document.getElementById('zone-bottom') },
-      shoes:    { xMin: 670, xMax: 820, yMin: 630, yMax: 740, zone: document.getElementById('zone-feet') },
-      hand:     { xMin: 760, xMax: 880, yMin: 510, yMax: 660, zone: document.getElementById('zone-hand') }
-    };
-
-    // State of currently equipped items by slot
-    const equippedSlots = {
-      hair: null,
-      top: null,
-      bottom: null,
-      dress: null,
-      shoes: null,
-      hand: null,
-      head_acc: null
-    };
-
-    // =========================================================================
-    // 3. RENDER ALL 32 ITEMS INTO THE DOM
-    // =========================================================================
-    const itemsLayer = document.getElementById('items-layer');
-
-    ITEMS_CONFIG.forEach(cfg => {
-      const itemEl = document.createElement('div');
-      itemEl.id = cfg.id;
-      itemEl.className = 'draggable-item';
-      itemEl.dataset.type = cfg.type;
-      itemEl.dataset.slot = cfg.slot;
-      itemEl.dataset.equipped = 'false';
-      itemEl.dataset.homeX = cfg.homeX;
-      itemEl.dataset.homeY = cfg.homeY;
-      itemEl.dataset.snapX = cfg.snapX;
-      itemEl.dataset.snapY = cfg.snapY;
-      itemEl.dataset.baseZ = cfg.zIndex;
-
-      itemEl.style.left = `${cfg.homeX}px`;
-      itemEl.style.top = `${cfg.homeY}px`;
-      itemEl.style.width = `${cfg.width}px`;
-      itemEl.style.zIndex = '30';
-
-      const img = document.createElement('img');
-      img.src = `${cfg.id}.png`;
-      img.alt = cfg.label;
-      img.className = 'w-full h-auto pointer-events-none select-none';
-
-      // Fallback placeholder if image file is not yet present on disk
-      img.onerror = () => {
-        img.remove();
-        const fallback = document.createElement('div');
-        fallback.className = 'img-fallback';
-        fallback.innerHTML = `<span>🎀</span><span>${cfg.label}</span>`;
-        itemEl.appendChild(fallback);
-      };
-
-      itemEl.appendChild(img);
-      itemsLayer.appendChild(itemEl);
-    });
-
-    // =========================================================================
-    // 4. DYNAMIC STAGE SCALING (Maintains exact 1000x750 Proportions)
-    // =========================================================================
-    const gameStage = document.getElementById('game-stage');
-    const scaleContainer = document.getElementById('scale-container');
-    const STAGE_WIDTH = 1000;
-    const STAGE_HEIGHT = 750;
-    let currentScale = 1;
-
-    function resizeStage() {
-      const availWidth = window.innerWidth;
-      const availHeight = window.innerHeight;
-      const scaleX = availWidth / STAGE_WIDTH;
-      const scaleY = availHeight / STAGE_HEIGHT;
-      currentScale = Math.min(scaleX, scaleY);
-
-      gameStage.style.transform = `scale(${currentScale})`;
-      gameStage.style.transformOrigin = 'center center';
+    function allowDrop(ev) {
+      ev.preventDefault();
     }
 
-    window.addEventListener('resize', resizeStage);
-    window.addEventListener('load', resizeStage);
-    resizeStage();
-
-    // =========================================================================
-    // 5. EQUIP & UNEQUIP LOGIC
-    // =========================================================================
-    function createSparkles(centerX, centerY) {
-      const colors = ['#ff69b4', '#ffd700', '#ffb6c1', '#ffffff', '#ff1493'];
-      const icons = ['✨', '💖', '⭐', '🌸', '🎀'];
-
-      for (let i = 0; i < 8; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'sparkle text-sm font-bold';
-        particle.textContent = icons[Math.floor(Math.random() * icons.length)];
-        particle.style.left = `${centerX}px`;
-        particle.style.top = `${centerY}px`;
-        particle.style.color = colors[Math.floor(Math.random() * colors.length)];
-
-        const tx = (Math.random() - 0.5) * 140;
-        const ty = (Math.random() - 0.7) * 130;
-        const rot = (Math.random() - 0.5) * 180;
-
-        particle.style.setProperty('--tx', `${tx}px`);
-        particle.style.setProperty('--ty', `${ty}px`);
-        particle.style.setProperty('--rot', `${rot}deg`);
-
-        gameStage.appendChild(particle);
-        setTimeout(() => particle.remove(), 900);
-      }
+    function drag(ev) {
+      initAudio();
+      playSound('pickup');
+      ev.dataTransfer.setData("text", ev.target.id);
     }
 
-    function equipItem(itemEl, playFx = true) {
-      const slot = itemEl.dataset.slot;
-      const snapX = parseFloat(itemEl.dataset.snapX);
-      const snapY = parseFloat(itemEl.dataset.snapY);
-      const targetZ = parseInt(itemEl.dataset.baseZ, 10);
+    function drop(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("text");
+      var draggedEl = document.getElementById(data);
 
-      // Dress interaction: Wearing a full dress auto-unequips top & bottom
-      if (slot === 'dress') {
-        if (equippedSlots.top) unequipItem(equippedSlots.top, false);
-        if (equippedSlots.bottom) unequipItem(equippedSlots.bottom, false);
-      } else if (slot === 'top' || slot === 'bottom') {
-        if (equippedSlots.dress) unequipItem(equippedSlots.dress, false);
+      var dropTarget = ev.target;
+      if (dropTarget.tagName === 'IMG') {
+        dropTarget = dropTarget.parentNode;
       }
 
-      // If another item is in this slot, return it to its closet shelf
-      if (equippedSlots[slot] && equippedSlots[slot] !== itemEl) {
-        unequipItem(equippedSlots[slot], false);
-      }
-
-      itemEl.classList.add('smooth-transit');
-      itemEl.style.left = `${snapX}px`;
-      itemEl.style.top = `${snapY}px`;
-      itemEl.dataset.equipped = 'true';
-      itemEl.classList.add('equipped');
-      itemEl.style.zIndex = targetZ;
-      equippedSlots[slot] = itemEl;
-
-      setTimeout(() => itemEl.classList.remove('smooth-transit'), 350);
-
-      if (playFx) {
+      // If dropped onto the game stage, switch to full-size canvas version (-full.png)
+      if (dropTarget.id === 'game-stage') {
+        if (!draggedEl.src.includes('-full')) {
+          draggedEl.src = data + '-full.png';
+        }
         playSound('equip');
-        createSparkles(snapX + (itemEl.offsetWidth / 2), snapY + (itemEl.offsetHeight / 2));
-      }
-    }
-
-    function unequipItem(itemEl, playFx = true) {
-      const slot = itemEl.dataset.slot;
-      const homeX = parseFloat(itemEl.dataset.homeX);
-      const homeY = parseFloat(itemEl.dataset.homeY);
-
-      itemEl.classList.add('smooth-transit');
-      itemEl.style.left = `${homeX}px`;
-      itemEl.style.top = `${homeY}px`;
-      itemEl.dataset.equipped = 'false';
-      itemEl.classList.remove('equipped');
-      itemEl.style.zIndex = '30';
-
-      if (equippedSlots[slot] === itemEl) {
-        equippedSlots[slot] = null;
+      } 
+      // If dropped back into wardrobe, switch back to thumbnail version (.png)
+      else if (dropTarget.id === 'wardrobe-zone') {
+        if (draggedEl.src.includes('-full')) {
+          draggedEl.src = data + '.png';
+        }
+        playSound('return');
       }
 
-      setTimeout(() => itemEl.classList.remove('smooth-transit'), 350);
-      if (playFx) playSound('return');
+      dropTarget.appendChild(draggedEl);
     }
-
-    // =========================================================================
-    // 6. DRAG & DROP CONTROLLER (Touch, Pointer, Click/Tap)
-    // =========================================================================
-    let activeDrag = null;
-
-    document.querySelectorAll('.draggable-item').forEach(item => {
-      item.addEventListener('pointerdown', (e) => {
-        if (e.button !== 0) return;
-
-        initAudio();
-        playSound('pickup');
-
-        const stageRect = gameStage.getBoundingClientRect();
-        const itemLeft = parseFloat(item.style.left);
-        const itemTop = parseFloat(item.style.top);
-        const pointerStageX = (e.clientX - stageRect.left) / currentScale;
-        const pointerStageY = (e.clientY - stageRect.top) / currentScale;
-
-        activeDrag = {
-          element: item,
-          startX: itemLeft,
-          startY: itemTop,
-          offsetX: pointerStageX - itemLeft,
-          offsetY: pointerStageY - itemTop,
-          hasMoved: false,
-          pointerId: e.pointerId
-        };
-
-        item.classList.remove('smooth-transit');
-        item.setPointerCapture(e.pointerId);
-        item.classList.add('is-dragging');
-
-        const type = item.dataset.type;
-        if (TARGETS[type] && TARGETS[type].zone) {
-          TARGETS[type].zone.classList.add('active-target');
-        }
-      });
-
-      item.addEventListener('pointermove', (e) => {
-        if (!activeDrag || activeDrag.element !== item) return;
-
-        const stageRect = gameStage.getBoundingClientRect();
-        const pointerStageX = (e.clientX - stageRect.left) / currentScale;
-        const pointerStageY = (e.clientY - stageRect.top) / currentScale;
-
-        const newLeft = pointerStageX - activeDrag.offsetX;
-        const newTop = pointerStageY - activeDrag.offsetY;
-
-        if (Math.hypot(newLeft - activeDrag.startX, newTop - activeDrag.startY) > 6) {
-          activeDrag.hasMoved = true;
-        }
-
-        item.style.left = `${newLeft}px`;
-        item.style.top = `${newTop}px`;
-      });
-
-      const handlePointerEnd = (e) => {
-        if (!activeDrag || activeDrag.element !== item) return;
-
-        item.releasePointerCapture(e.pointerId);
-        item.classList.remove('is-dragging');
-
-        const type = item.dataset.type;
-        if (TARGETS[type] && TARGETS[type].zone) {
-          TARGETS[type].zone.classList.remove('active-target');
-        }
-
-        // Tap/Click (no drag movement) toggles equip/unequip
-        if (!activeDrag.hasMoved) {
-          if (item.dataset.equipped === 'true') {
-            unequipItem(item, true);
-          } else {
-            equipItem(item, true);
-          }
-          activeDrag = null;
-          return;
-        }
-
-        // Drag-and-drop hit check on doll
-        const stageRect = gameStage.getBoundingClientRect();
-        const dropX = (e.clientX - stageRect.left) / currentScale;
-        const dropY = (e.clientY - stageRect.top) / currentScale;
-
-        const target = TARGETS[type];
-        const isInsideDollArea = dropX >= target.xMin && dropX <= target.xMax &&
-                                 dropY >= target.yMin && dropY <= target.yMax;
-
-        if (isInsideDollArea) {
-          equipItem(item, true);
-        } else {
-          unequipItem(item, true);
-        }
-
-        activeDrag = null;
-      };
-
-      item.addEventListener('pointerup', handlePointerEnd);
-      item.addEventListener('pointercancel', handlePointerEnd);
-    });
   </script>
+</head>
+<body>
+
+  <div id="wrapper">
+    <header>
+      <h1>👑 Dress Me 👑</h1>
+    </header>
+
+    <main>
+      <div id="game-stage" ondrop="drop(event)" ondragover="allowDrop(event)">
+        
+        <!-- The Wardrobe Zone -->
+        <div id="wardrobe-zone" ondrop="drop(event)" ondragover="allowDrop(event)">
+          <img src="item01.png" draggable="true" ondragstart="drag(event)" id="item01" alt="Item 1">
+          <img src="item02.png" draggable="true" ondragstart="drag(event)" id="item02" alt="Item 2">
+          <img src="item03.png" draggable="true" ondragstart="drag(event)" id="item03" alt="Item 3">
+          <img src="item04.png" draggable="true" ondragstart="drag(event)" id="item04" alt="Item 4">
+          <img src="item05.png" draggable="true" ondragstart="drag(event)" id="item05" alt="Item 5">
+          <img src="item06.png" draggable="true" ondragstart="drag(event)" id="item06" alt="Item 6">
+          <img src="item07.png" draggable="true" ondragstart="drag(event)" id="item07" alt="Item 7">
+          <img src="item08.png" draggable="true" ondragstart="drag(event)" id="item08" alt="Item 8">
+          <img src="item09.png" draggable="true" ondragstart="drag(event)" id="item09" alt="Item 9">
+          <img src="item10.png" draggable="true" ondragstart="drag(event)" id="item10" alt="Item 10">
+          <img src="item11.png" draggable="true" ondragstart="drag(event)" id="item11" alt="Item 11">
+          <img src="item12.png" draggable="true" ondragstart="drag(event)" id="item12" alt="Item 12">
+          <img src="item13.png" draggable="true" ondragstart="drag(event)" id="item13" alt="Item 13">
+          <img src="item14.png" draggable="true" ondragstart="drag(event)" id="item14" alt="Item 14">
+          <img src="item15.png" draggable="true" ondragstart="drag(event)" id="item15" alt="Item 15">
+          <img src="item16.png" draggable="true" ondragstart="drag(event)" id="item16" alt="Item 16">
+          <img src="item17.png" draggable="true" ondragstart="drag(event)" id="item17" alt="Item 17">
+          <img src="item18.png" draggable="true" ondragstart="drag(event)" id="item18" alt="Item 18">
+          <img src="item19.png" draggable="true" ondragstart="drag(event)" id="item19" alt="Item 19">
+        </div>
+
+      </div>
+    </main>
+
+    <footer>
+      <p> Ella Adams, 2026. This is a fictitious web page created solely for the purpose of education and training. All products and people associated with this web page are also fictitious. Any resemblance to real brands, products, or people is purely coincidental. Information provided about the product is also fictitious and should not be construed to be representative of actual products on the market in a similar product category.</p>
+    </footer>
+  </div>
+
 </body>
 </html>
