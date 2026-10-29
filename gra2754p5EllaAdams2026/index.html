@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Dress Up Doll Game</title>
+  <title>Drag and Drop Game | Ella Adams, 2026</title>
   
-  <!-- Import a cute, bubbly princess font from Google Fonts -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
-    /* CSS Resets for body and wrapper */
+  
     body, html {
       margin: 0;
       padding: 0;
@@ -18,7 +18,7 @@
       font-family: 'Fredoka', 'Segoe UI', Tahoma, sans-serif;
     }
 
-    /* 1366-pixel fixed-width wrapper (Rubric requirement) */
+
     #wrapper {
       width: 1366px;
       margin: 0 auto;
@@ -29,7 +29,7 @@
       min-height: 100vh;
     }
 
-    /* Cute Princess Header Styling */
+
     header {
       background: linear-gradient(135deg, #ffc2dc 0%, #ffdfed 100%);
       padding: 25px 30px;
@@ -59,7 +59,7 @@
       padding: 20px;
     }
 
-    /* THE GAME STAGE: 1280x1024 background match */
+   
     #game-stage {
       width: 1280px; 
       height: 1024px; 
@@ -70,7 +70,6 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
-    /* THE WARDROBE: Centered grid layout over shelves */
     #wardrobe-zone {
 	position: absolute;
 	top: 140px;
@@ -106,7 +105,7 @@
       border-color: #d6336c;
     }
 
-    /* Dropped items on game stage (-full.png) */
+    
     #game-stage > img {
       position: absolute;
       top: 0;
@@ -133,9 +132,7 @@
   </style>
 
   <script>
-    // =========================================================================
-    // BUILT-IN SOUND SYNTHESIZER (No buttons required)
-    // =========================================================================
+
     let audioCtx = null;
     function initAudio() {
       try {
@@ -195,9 +192,7 @@
       } catch (err) {}
     }
 
-    // =========================================================================
-    // NATIVE DRAG AND DROP & FILE SWAPPING
-    // =========================================================================
+  
     function allowDrop(ev) {
       ev.preventDefault();
     }
@@ -218,14 +213,14 @@
         dropTarget = dropTarget.parentNode;
       }
 
-      // If dropped onto the game stage, switch to full-size canvas version (-full.png)
+  
       if (dropTarget.id === 'game-stage') {
         if (!draggedEl.src.includes('-full')) {
           draggedEl.src = data + '-full.png';
         }
         playSound('equip');
       } 
-      // If dropped back into wardrobe, switch back to thumbnail version (.png)
+  
       else if (dropTarget.id === 'wardrobe-zone') {
         if (draggedEl.src.includes('-full')) {
           draggedEl.src = data + '.png';
@@ -247,7 +242,7 @@
     <main>
       <div id="game-stage" ondrop="drop(event)" ondragover="allowDrop(event)">
         
-        <!-- The Wardrobe Zone -->
+        
         <div id="wardrobe-zone" ondrop="drop(event)" ondragover="allowDrop(event)">
           <img src="item01.png" draggable="true" ondragstart="drag(event)" id="item01" alt="Item 1">
           <img src="item02.png" draggable="true" ondragstart="drag(event)" id="item02" alt="Item 2">
